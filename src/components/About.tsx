@@ -53,7 +53,7 @@ const About = () => {
                   "Every great brand has a story worth telling—it just needs the right words and a 
                   little spark to create a stir."
                 </p>
-                <p className="text-sm text-muted-foreground mt-2">— Jennifer Paire</p>
+                <p className="text-sm text-muted-foreground mt-2">- Jennifer Paire</p>
               </div>
 
               {/* Values */}

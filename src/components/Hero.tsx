@@ -42,7 +42,7 @@ const Hero = () => {
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-primary-foreground/90 mb-12 font-light leading-relaxed animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            We help entrepreneurs and experts become less of a well-kept secret.
+            Turning best-kept secrets into well-known stories.
           </p>
 
           {/* CTAs */}
