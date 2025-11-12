@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Quote, TrendingUp, Users, Award } from "lucide-react";
+import { Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -14,24 +14,6 @@ const testimonials = [
     content: "Jennifer is such a powerful and caring PR Strategist! I'm am so excited to be working together!",
     image: "JD"
   }
-];
-
-const stats = [
-  {
-    icon: TrendingUp,
-    value: "3.2x",
-    label: "Average Media Coverage Multiplier",
-  },
-  {
-    icon: Users,
-    value: "45%",
-    label: "Average Traffic Increase",
-  },
-  {
-    icon: Award,
-    value: "89%",
-    label: "Client Retention Rate",
-  },
 ];
 
 const Testimonials = () => {
@@ -55,28 +37,6 @@ const Testimonials = () => {
             <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto">
               Don't just take our word for it. See how we've helped businesses shine.
             </p>
-          </div>
-
-          {/* Stats */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <Card 
-                  key={stat.label} 
-                  className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm text-center animate-fade-up hover:bg-primary-foreground/15 transition-all duration-300"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CardContent className="pt-8 pb-6">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold/20 mb-4">
-                      <Icon className="w-6 h-6 text-gold" />
-                    </div>
-                    <div className="text-4xl font-bold text-gold mb-2">{stat.value}</div>
-                    <p className="text-sm text-primary-foreground/70">{stat.label}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
           </div>
 
           {/* Testimonials */}
