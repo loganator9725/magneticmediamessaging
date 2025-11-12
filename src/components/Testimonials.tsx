@@ -3,22 +3,16 @@ import { Quote, TrendingUp, Users, Award } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Mitchell",
-    role: "Founder, Wellness Collective",
-    content: "Jennifer transformed our visibility overnight. Within 30 days, we were featured in three major publications and saw a 45% increase in website traffic. Her storytelling approach is pure magic.",
-    image: "SM"
+    name: "Lee Walker",
+    role: "Founder, Daily Driver Consulting",
+    content: "Jennifer is 100% the person you need by your side as a business owner looking to make a difference in the world. She goes above and beyond to help you put out your story to make sure it gets the attention it deserves and more. You might think PR value is outdated until you talk to her and find out what it can really do for your brand!",
+    image: "LW"
   },
   {
-    name: "David Chen",
-    role: "CEO, TechStart Solutions",
-    content: "The media kit M3 created positioned us as thought leaders in our industry. We've had consistent media coverage ever since, and our credibility has skyrocketed. Worth every penny.",
-    image: "DC"
-  },
-  {
-    name: "Rachel Thompson",
-    role: "Author & Speaker",
-    content: "I was a well-kept secret until I worked with Magnetic Media. Now I'm regularly invited to speak and contribute to major platforms. Jennifer's strategy and persistence made all the difference.",
-    image: "RT"
+    name: "Dr. Joseph Drolshagen",
+    role: "The Rapid Revenue Growth Specialist, Author",
+    content: "Jennifer is such a powerful and caring PR Strategist! I'm am so excited to be working together!",
+    image: "JD"
   }
 ];
 
