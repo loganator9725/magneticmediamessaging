@@ -81,7 +81,7 @@ const Footer = () => {
                     <Globe className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://www.google.com/maps/place/Magnetic+Media+%26+Messaging/@46.423669,-129.9427085,3z/data=!3m1!4b1!4m6!3m5!1s0x27066f7a4eb0d49b:0x2089a6a1dc3de89f!8m2!3d46.423669!4d-129.9427086!16s%2Fg%2F11ykypt570?hl=en&entry=ttu&g_ep=EgoyMDI1MTExMS4wIKXMDSoASAFQAw%3D%3D"
+                    href="https://maps.app.goo.gl/gEU8bh1Pd3m6Yq1S6"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-full bg-primary-foreground/10 hover:bg-gold/20 transition-colors"
