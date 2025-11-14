@@ -181,10 +181,6 @@ const ContactCTA = () => {
                       <Sparkles className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
                       <span>Ethical, transparent, and always authentic</span>
                     </li>
-                    <li className="flex items-start gap-2">
-                      <Sparkles className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
-                      <span>89% client retention speaks volumes</span>
-                    </li>
                   </ul>
                 </CardContent>
               </Card>
