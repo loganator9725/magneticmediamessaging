@@ -100,7 +100,7 @@ const Footer = () => {
               © {currentYear} Magnetic Media & Messaging. All rights reserved.
             </p>
             <p className="text-xs text-primary-foreground/50 mt-2">
-              Helping entrepreneurs become less of a well-kept secret.
+              Turning best-kept secrets into well-known stories.
             </p>
           </div>
         </div>
