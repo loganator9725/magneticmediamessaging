@@ -63,7 +63,7 @@ const Footer = () => {
                 </a>
                 <div className="flex gap-4 pt-2">
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/jpaire/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-full bg-primary-foreground/10 hover:bg-gold/20 transition-colors"
@@ -81,7 +81,7 @@ const Footer = () => {
                     <Globe className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://google.com/maps/place/Magnetic+Media+%26+Messaging/data=!4m2!3m1!1s0x0:0x2089a6a1dc3de89f?sa=X&ved=1t:2428&hl=en&ictx=111"
+                    href="https://www.google.com/maps/place/Magnetic+Media+%26+Messaging/@46.423669,-129.9427085,3z/data=!3m1!4b1!4m6!3m5!1s0x27066f7a4eb0d49b:0x2089a6a1dc3de89f!8m2!3d46.423669!4d-129.9427086!16s%2Fg%2F11ykypt570?hl=en&entry=ttu&g_ep=EgoyMDI1MTExMS4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-full bg-primary-foreground/10 hover:bg-gold/20 transition-colors"
