@@ -17,6 +17,7 @@ const Hero = () => {
           src={heroImage} 
           alt="Professional PR Strategy" 
           className="w-full h-full object-cover"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy/85 to-navy-dark/95" />
       </div>
@@ -46,12 +47,12 @@ const Hero = () => {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up relative z-20" style={{ animationDelay: '0.4s' }}>
             <Button 
               size="lg"
               variant="hero"
               onClick={() => scrollToSection('contact')}
-              className="group shadow-gold hover:shadow-lifted transition-all duration-300"
+              className="group shadow-gold hover:shadow-lifted transition-all duration-300 relative z-20"
             >
               Book a Consultation
               <Sparkles className="ml-2 w-4 h-4 group-hover:rotate-12 transition-transform" />
@@ -60,6 +61,7 @@ const Hero = () => {
               size="lg"
               variant="outline-hero"
               onClick={() => scrollToSection('services')}
+              className="relative z-20"
             >
               See Our Packages
             </Button>

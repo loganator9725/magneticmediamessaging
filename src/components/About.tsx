@@ -21,6 +21,7 @@ const About = () => {
                 src={jenniferPortrait}
                 alt="Jennifer Paire, Founder of Magnetic Media & Messaging"
                 className="w-full h-auto object-cover"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/20 to-transparent" />
             </div>

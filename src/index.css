@@ -39,6 +39,12 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    /* UPP Semantic Spacing Tokens */
+    --gap-sm: 0.5rem;
+    --gap-md: 1rem;
+    --gap-lg: 2rem;
+    --gap-xl: 3rem;
+
     /* Custom brand tokens */
     --navy-dark: 217 80% 15%;
     --navy-light: 217 60% 35%;
