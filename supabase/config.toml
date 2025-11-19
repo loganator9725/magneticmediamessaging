@@ -1,1 +1,4 @@
 project_id = "msgxubftbqihdflusfsy"
+
+[functions.upp-evaluator]
+verify_jwt = false
