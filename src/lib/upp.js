@@ -14,11 +14,38 @@ export const predictNextPage = () => {
   // Probability model for page transitions
   const transitionWeights = {
     '/': {
-      '#about': 0.35,
+      '#about': 0.30,
       '#services': 0.25,
-      '#pricing': 0.20,
-      '#testimonials': 0.15,
+      '/packages/media-breakthrough': 0.15,
+      '/packages/visibility-sprint': 0.10,
+      '/packages/story-strategy-retainer': 0.10,
+      '/addons': 0.05,
       '#contact': 0.05
+    },
+    '/packages/media-breakthrough': {
+      '/': 0.40,
+      '/packages/visibility-sprint': 0.20,
+      '/addons': 0.20,
+      '#contact': 0.20
+    },
+    '/packages/visibility-sprint': {
+      '/': 0.40,
+      '/packages/media-breakthrough': 0.15,
+      '/packages/story-strategy-retainer': 0.15,
+      '/addons': 0.15,
+      '#contact': 0.15
+    },
+    '/packages/story-strategy-retainer': {
+      '/': 0.40,
+      '/packages/visibility-sprint': 0.20,
+      '/addons': 0.20,
+      '#contact': 0.20
+    },
+    '/addons': {
+      '/': 0.50,
+      '/packages/media-breakthrough': 0.15,
+      '/packages/visibility-sprint': 0.15,
+      '#contact': 0.20
     }
   };
 
@@ -33,12 +60,12 @@ export const predictNextPage = () => {
 };
 
 /**
- * Prefetch section content for smooth scrolling
+ * Prefetch section or page content
  */
-const prefetchSection = (sectionId) => {
+const prefetchSection = (target) => {
   const link = document.createElement('link');
   link.rel = 'prefetch';
-  link.href = sectionId;
+  link.href = target;
   document.head.appendChild(link);
 };
 
