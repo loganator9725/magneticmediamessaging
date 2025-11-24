@@ -178,7 +178,7 @@ const ContactCTA = () => {
                     variant="outline" 
                     className="w-full" 
                     size="lg"
-                    onClick={() => window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1IfFzskmitNplwxBXOjpqhBmj0yUgrBN-17F-eYIq-n6EkW52PrFf-tkzlBk94ovH2TtrdmyQX', '_blank')}
+                    onClick={() => window.open('https://calendar.app.google/BF1sRR1BFoJhNYRb9', '_blank')}
                   >
                     <Calendar className="w-4 h-4 mr-2" />
                     Book Your Call
