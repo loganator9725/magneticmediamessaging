@@ -67,6 +67,7 @@ const prefetchSection = (target) => {
   link.rel = 'prefetch';
   link.href = target;
   document.head.appendChild(link);
+  console.log(`[UPP] Prefetching: ${target}`);
 };
 
 /**
@@ -86,6 +87,8 @@ export const preloadCriticalAssets = () => {
     if (asset.type) link.type = asset.type;
     document.head.appendChild(link);
   });
+  
+  console.log('[UPP] Critical assets preloaded:', criticalAssets.length);
 };
 
 /**
@@ -100,6 +103,7 @@ export const lazyLoadImages = () => {
           img.src = img.dataset.src;
           img.removeAttribute('data-src');
           observer.unobserve(img);
+          console.log('[UPP] Lazy loaded image:', img.dataset.src || img.src);
         }
       }
     });
@@ -109,9 +113,12 @@ export const lazyLoadImages = () => {
   });
 
   // Observe all images with data-src attribute
-  document.querySelectorAll('img[data-src]').forEach(img => {
+  const lazyImages = document.querySelectorAll('img[data-src]');
+  lazyImages.forEach(img => {
     imageObserver.observe(img);
   });
+  
+  console.log('[UPP] Lazy loading initialized for', lazyImages.length, 'images');
 };
 
 /**
