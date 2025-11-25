@@ -175,8 +175,9 @@ const ContactCTA = () => {
                     we can help amplify your story.
                   </p>
                   <Button 
+                    id="book-call-button"
                     variant="outline" 
-                    className="w-full" 
+                    className="w-full transition-all duration-300" 
                     size="lg"
                     onClick={() => window.open('https://calendar.app.google/BF1sRR1BFoJhNYRb9', '_blank')}
                   >

@@ -52,6 +52,23 @@ const packages = [
 ];
 
 const Services = () => {
+  const scrollToBookCall = () => {
+    const contactSection = document.getElementById('contact');
+    const bookCallButton = document.getElementById('book-call-button');
+    
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+    
+    // Highlight the Book Your Call button after scrolling
+    setTimeout(() => {
+      if (bookCallButton) {
+        bookCallButton.classList.add('ring-4', 'ring-gold', 'scale-105', 'shadow-glow');
+        setTimeout(() => {
+          bookCallButton.classList.remove('ring-4', 'ring-gold', 'scale-105', 'shadow-glow');
+        }, 2000);
+      }
+    }, 800);
+  };
+  
   const scrollToContact = () => {
     const element = document.getElementById('contact');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -117,7 +134,7 @@ const Services = () => {
                     <Button 
                       className="w-full" 
                       variant={pkg.popular ? "default" : "outline"}
-                      onClick={scrollToContact}
+                      onClick={pkg.name === "Visibility Sprint" ? scrollToBookCall : scrollToContact}
                     >
                       Get Started
                     </Button>
