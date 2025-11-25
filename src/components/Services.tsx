@@ -134,7 +134,7 @@ const Services = () => {
                     <Button 
                       className="w-full" 
                       variant={pkg.popular ? "default" : "outline"}
-                      onClick={pkg.name === "Visibility Sprint" ? scrollToBookCall : scrollToContact}
+                      onClick={scrollToBookCall}
                     >
                       Get Started
                     </Button>
