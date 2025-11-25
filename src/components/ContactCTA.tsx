@@ -179,7 +179,7 @@ const ContactCTA = () => {
                     variant="outline" 
                     className="w-full transition-all duration-300" 
                     size="lg"
-                    onClick={() => window.open('https://calendar.app.google/BF1sRR1BFoJhNYRb9', '_blank')}
+                    onClick={() => window.open('https://calendly.com/jpaire-yryw/consultation-call', '_blank')}
                   >
                     <Calendar className="w-4 h-4 mr-2" />
                     Book Your Call
