@@ -30,17 +30,14 @@ const ContactCTA = () => {
     }
 
     try {
-      // Send email via edge function
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({
+      // Send email via Netlify Forms
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
           ...formData,
-          recipientEmail: "jennifer@magneticmediamessaging.com", // Easy to change later
-        }),
+        }).toString(),
       });
 
       if (!response.ok) {
@@ -103,7 +100,8 @@ const ContactCTA = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" name="contact" data-netlify="true">
+                  <input type="hidden" name="form-name" value="contact" />
                   <div>
                     <Label htmlFor="name">Name *</Label>
                     <Input

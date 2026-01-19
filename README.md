@@ -73,9 +73,8 @@ Notes:
 
 - This is a Vite app; Netlify will serve the contents of the `dist` folder after build.
 - This project uses client-side routing. A `_redirects` file is already added to `public` with `/* /index.html 200` to make SPA routes work on Netlify.
-- If your app uses Supabase or other services, set build/runtime env vars in the Netlify Site Settings. The project expects at least:
-	- `VITE_SUPABASE_URL`
-	- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- **Contact Form**: Uses Netlify Forms. Ensure form detection is enabled in your Netlify site settings.
+- **Supabase**: If using the UPP features, set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in Netlify Site Settings.
 
 Steps to deploy on Netlify:
 
