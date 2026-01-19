@@ -16,7 +16,7 @@ const ContactCTA = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -29,18 +29,32 @@ const ContactCTA = () => {
       return;
     }
 
-    const subject = `Contact Request from ${formData.name}`;
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`;
-    
-    window.location.href = `mailto:jennifer@magneticmediamessaging.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          ...formData,
+        }).toString(),
+      });
 
-    toast({
-      title: "Opening Email Client",
-      description: "Please send the email to complete your request.",
-    });
+      if (!response.ok) throw new Error("Network response was not ok");
 
-    // Reset form
-    setFormData({ name: "", email: "", company: "", message: "" });
+      toast({
+        title: "Message Sent!",
+        description: "We'll get back to you within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({ name: "", email: "", company: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -82,7 +96,8 @@ const ContactCTA = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" name="contact" method="POST" data-netlify="true">
+                  <input type="hidden" name="form-name" value="contact" />
                   <div>
                     <Label htmlFor="name">Name *</Label>
                     <Input
