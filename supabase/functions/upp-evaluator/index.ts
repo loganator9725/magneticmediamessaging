@@ -50,6 +50,18 @@ const stdDev = (arr: number[]): number => {
  */
 const simulateStrategy = (strategy: string, iterations: number, realData?: MetricData[]): MetricData[] => {
     const results: MetricData[] = [];
+
+    // Use real data if available and contains data for the current strategy
+    const strategySpecificRealData = realData?.filter(d => d.strategy === strategy);
+    if (strategySpecificRealData && strategySpecificRealData.length > 0) {
+        console.log(`[UPP Evaluator] Using ${strategySpecificRealData.length} real data points for ${strategy} simulation.`);
+        for (let i = 0; i < iterations; i++) {
+            // Sample from the real data distribution
+            const sample = strategySpecificRealData[Math.floor(Math.random() * strategySpecificRealData.length)];
+            results.push(sample);
+        }
+        return results;
+    }
     
     // Use real data if available, otherwise generate synthetic data
     const baseMetrics = {
@@ -99,9 +111,14 @@ const calculateSharpeRatios = (metrics: MetricData[]): StrategyResult => {
     // Sharpe Ratio 2: mean(reward) / stddev(latency)
     const sharpeRatioLatency = stdDevResponseTime === 0 ? 0 : avgReward / stdDevResponseTime;
     
+    // Get weights from environment variables, with defaults to maintain original behavior
+    const rewardWeight = parseFloat(Deno.env.get("UPP_REWARD_WEIGHT") ?? "1");
+    const latencyWeight = parseFloat(Deno.env.get("UPP_LATENCY_WEIGHT") ?? "1");
+    const sustainabilityWeight = parseFloat(Deno.env.get("UPP_SUSTAINABILITY_WEIGHT") ?? "1");
+
     // Combined score: balance both ratios with sustainability factor
-    const sustainabilityFactor = 1 / avgEnergyCost;
-    const combinedScore = (sharpeRatioReward + sharpeRatioLatency) * sustainabilityFactor;
+    const sustainabilityFactor = sustainabilityWeight / avgEnergyCost;
+    const combinedScore = (rewardWeight * sharpeRatioReward + latencyWeight * sharpeRatioLatency) * sustainabilityFactor;
     
     return {
         strategy: metrics[0].strategy,

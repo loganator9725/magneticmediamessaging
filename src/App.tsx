@@ -9,6 +9,7 @@ import VisibilitySprint from "./pages/packages/VisibilitySprint";
 import StoryStrategyRetainer from "./pages/packages/StoryStrategyRetainer";
 import Addons from "./pages/Addons";
 import NotFound from "./pages/NotFound";
+import UPPTestPage from "./pages/UPPTestPage";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/packages/visibility-sprint" element={<VisibilitySprint />} />
           <Route path="/packages/story-strategy-retainer" element={<StoryStrategyRetainer />} />
           <Route path="/addons" element={<Addons />} />
+          <Route path="/upp-test" element={<UPPTestPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

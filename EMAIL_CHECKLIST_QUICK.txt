@@ -1,0 +1,110 @@
+================================================================================
+EMAIL DELIVERY FIX - QUICK CHECKLIST FOR CLIENT
+================================================================================
+
+STEP 1: RUN THESE POWERSHELL COMMANDS
+(Open PowerShell, replace "yourdomain.com" with your actual domain)
+
+Command 1:
+Resolve-DnsName -Name magneticmediamessaging.com -Type MX
+
+Command 2:
+Resolve-DnsName -Name magneticmediamessaging.com -Type TXT
+
+Command 3:
+Resolve-DnsName -Name _dmarc.magneticmediamessaging.com -Type TXT
+
+Command 4 (if above fail):
+nslookup -type=mx magneticmediamessaging.com
+
+Command 5 (if Command 2 fails):
+nslookup -type=txt magneticmediamessaging.com
+
+→ COPY & PASTE ALL OUTPUT FOR EACH COMMAND
+PS C:\Users\logan\OneDrive\Documents\GitHub\magneticmediamessaging> Resolve-DnsName -Name magneticmediamessaging.com -Type MX
+
+Name                                     Type   TTL   Section    NameExchange                              Preference
+----                                     ----   ---   -------    ------------                              ----------
+magneticmediamessaging.com               MX     3600  Answer     inbound.postmarkapp.com                   10
+magneticmediamessaging.com               MX     3600  Answer     smtp.google.com                           1
+
+
+PS C:\Users\logan\OneDrive\Documents\GitHub\magneticmediamessaging> Resolve-DnsName -Name magneticmediamessaging.com -Type TXT
+
+Name                        Type TTL   Section    PrimaryServer               NameAdministrator           SerialNumber
+----                        ---- ---   -------    -------------               -----------------           ------------
+magneticmediamessaging.com  SOA  1800  Authority  dns1.p01.nsone.net          domains+netlify.netlify.com 1764802409  
+
+
+PS C:\Users\logan\OneDrive\Documents\GitHub\magneticmediamessaging> Resolve-DnsName -Name _dmarc.magneticmediamessaging.com -Type TXT
+Resolve-DnsName : _dmarc.magneticmediamessaging.com : DNS name does not exist
+At line:1 char:1
++ Resolve-DnsName -Name _dmarc.magneticmediamessaging.com -Type TXT
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (_dmarc.magneticmediamessaging.com:String) [Resolve-DnsName], Win32Exception
+    + FullyQualifiedErrorId : DNS_ERROR_RCODE_NAME_ERROR,Microsoft.DnsClient.Commands.ResolveDnsName
+
+PS C:\Users\logan\OneDrive\Documents\GitHub\magneticmediamessaging> nslookup -type=mx magneticmediamessaging.com 
+Server:  UnKnown
+Address:  2605:a601:adf2:2800::1
+
+Non-authoritative answer:
+magneticmediamessaging.com      MX preference = 1, mail exchanger = smtp.google.com
+magneticmediamessaging.com      MX preference = 10, mail exchanger = inbound.postmarkapp.com
+PS C:\Users\logan\OneDrive\Documents\GitHub\magneticmediamessaging> nslookup -type=txt magneticmediamessaging.com
+>>
+Server:  UnKnown
+Address:  2605:a601:adf2:2800::1
+
+magneticmediamessaging.com
+        primary name server = dns1.p01.nsone.net
+        responsible mail addr = domains+netlify.netlify.com
+        serial  = 1764802409
+        refresh = 43200 (12 hours)
+        retry   = 7200 (2 hours)
+        expire  = 1209600 (14 days)
+        default TTL = 3600 (1 hour)
+PS C:\Users\logan\OneDrive\Documents\GitHub\magneticmediamessaging> 
+================================================================================
+STEP 2: ANSWER THESE QUESTIONS
+================================================================================
+
+1. Domain name? (e.g., magneticmediamessaging.com)
+   _______________________________________________________________
+
+2. Google Workspace or personal Gmail with forwarding?
+   [/] Google Workspace (paid)  [ ] Personal Gmail  [ ] Other: ______
+
+3. Email address to receive mail? jennifer@magneticmediamessaging.com
+   _______________________________________________________________
+
+4. Can you access DNS settings? [/] Yes  [ ] No  [ ] Not sure
+
+5. Google Workspace Admin access? [/] Yes  [ ] No  [ ] N/A
+
+================================================================================
+STEP 3: CHECK GMAIL (if applicable)
+================================================================================
+
+Google Workspace Users:
+- Go to Admin Console → Reports → Email Log Search
+- Search for emails to your domain in last 24 hours
+- Screenshot any failures/errors
+
+Gmail Users (forwarding):
+- Check Gmail Settings → Forwarding and POP/IMAP
+- Check Gmail Settings → Filters and Blocked Addresses
+- Screenshot any blocking rules
+- Check Spam & All Mail folders for unexpected emails
+
+================================================================================
+STEP 4: SEND TO LOGAN
+================================================================================
+
+Send:
+✓ PowerShell command outputs (all 5 commands)
+✓ Answers to 5 questions above
+✓ Screenshots from Step 3 (if applicable)
+✓ Any error emails or bounce messages you received
+
+================================================================================

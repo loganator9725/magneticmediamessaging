@@ -64,6 +64,26 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/2e8348bc-2cf6-49b5-8087-1fe939260bfd) and click on Share -> Publish.
 
+## Deploying to Netlify
+
+- **Build command**: `npm run build`
+- **Publish directory**: `dist`
+
+Notes:
+
+- This is a Vite app; Netlify will serve the contents of the `dist` folder after build.
+- This project uses client-side routing. A `_redirects` file is already added to `public` with `/* /index.html 200` to make SPA routes work on Netlify.
+- If your app uses Supabase or other services, set build/runtime env vars in the Netlify Site Settings. The project expects at least:
+	- `VITE_SUPABASE_URL`
+	- `VITE_SUPABASE_PUBLISHABLE_KEY`
+
+Steps to deploy on Netlify:
+
+1. In Netlify, create a new site from Git and connect your repository.
+2. Set the build command to `npm run build` and the publish directory to `dist`.
+3. In Site Settings -> Build & deploy -> Environment, add any needed env vars (see notes above).
+4. Deploy the site. After a successful build, your site will be live on the Netlify domain.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
