@@ -16,7 +16,7 @@ const ContactCTA = () => {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -29,36 +29,18 @@ const ContactCTA = () => {
       return;
     }
 
-    try {
-      // Send email via Netlify Forms
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          "form-name": "contact",
-          ...formData,
-        }).toString(),
-      });
+    const subject = `Contact Request from ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`;
+    
+    window.location.href = `mailto:jennifer@magneticmediamessaging.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      if (!response.ok) {
-        throw new Error('Failed to send message');
-      }
+    toast({
+      title: "Opening Email Client",
+      description: "Please send the email to complete your request.",
+    });
 
-      toast({
-        title: "Message Sent!",
-        description: "We'll get back to you within 24 hours.",
-      });
-
-      // Reset form
-      setFormData({ name: "", email: "", company: "", message: "" });
-    } catch (error) {
-      console.error("Error sending message:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again or email us directly.",
-        variant: "destructive",
-      });
-    }
+    // Reset form
+    setFormData({ name: "", email: "", company: "", message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -100,8 +82,7 @@ const ContactCTA = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4" name="contact" data-netlify="true">
-                  <input type="hidden" name="form-name" value="contact" />
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <Label htmlFor="name">Name *</Label>
                     <Input
