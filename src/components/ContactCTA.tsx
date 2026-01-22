@@ -34,8 +34,10 @@ const ContactCTA = () => {
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || "N/A"}\n\nMessage:\n${formData.message}`;
     const mailtoLink = `mailto:jennifer@magneticmediamessaging.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
-    // Open default email client
-    window.location.href = mailtoLink;
+    // Create and click a link element instead of direct redirect (more reliable)
+    const link = document.createElement('a');
+    link.href = mailtoLink;
+    link.click();
     
     toast({
       title: "Email Client Opened",
