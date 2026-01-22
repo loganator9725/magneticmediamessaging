@@ -30,10 +30,19 @@ const ContactCTA = () => {
     }
 
     try {
-      const response = await fetch("/api/send-contact-email", {
+      // Submit to Netlify Forms using fetch with form encoding
+      const formBody = new URLSearchParams({
+        "form-name": "contact",
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        message: formData.message,
+      });
+
+      const response = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formBody.toString(),
       });
 
       if (!response.ok) throw new Error("Network response was not ok");
