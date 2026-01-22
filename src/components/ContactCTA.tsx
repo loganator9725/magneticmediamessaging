@@ -87,8 +87,7 @@ const ContactCTA = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4" name="contact" method="POST" data-netlify="true">
-                  <input type="hidden" name="form-name" value="contact" />
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <Label htmlFor="name">Name *</Label>
                     <Input
