@@ -16,7 +16,7 @@ const ContactCTA = () => {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -29,38 +29,23 @@ const ContactCTA = () => {
       return;
     }
 
-    try {
-      // Submit to Netlify Forms using fetch with form encoding
-      const formBody = new URLSearchParams({
-        "form-name": "contact",
-        name: formData.name,
-        email: formData.email,
-        company: formData.company,
-        message: formData.message,
-      });
+    // Build mailto link with form data
+    const subject = `New Contact: ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || "N/A"}\n\nMessage:\n${formData.message}`;
+    const mailtoLink = `mailto:jennifer@magneticmediamessaging.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Open default email client
+    window.location.href = mailtoLink;
+    
+    toast({
+      title: "Email Client Opened",
+      description: "Please review and send the pre-filled email to Jennifer.",
+    });
 
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formBody.toString(),
-      });
-
-      if (!response.ok) throw new Error("Network response was not ok");
-
-      toast({
-        title: "Message Sent!",
-        description: "We'll get back to you within 24 hours.",
-      });
-
-      // Reset form
+    // Reset form after a short delay
+    setTimeout(() => {
       setFormData({ name: "", email: "", company: "", message: "" });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    }
+    }, 500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
