@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "How to Build an Authentic Personal Brand That Stands Out",
+    "excerpt": "In a crowded marketplace, authenticity is your greatest competitive advantage. Learn the strategic framework Jennifer uses with her clients.",
+    "content": "Your personal brand is the story you tell about who you are, what you stand for, and the value you bring. When done strategically, it transforms how prospects, investors, and partners perceive you. The most successful entrepreneurs invest time in building a brand that reflects their true values and expertise.",
+    "author": "Featured Business Leader",
+    "date": "2026-01-20",
+    "category": "Strategy",
+    "featured": true,
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+    "isFeatured": true
+  },
+  {
+    "id": 2,
+    "title": "The ROI of Strategic Visibility for Entrepreneurs",
+    "excerpt": "Being visible in the right places to the right people isn't luck—it's strategy. See how entrepreneurs are capturing market attention.",
+    "content": "Strategic visibility means showing up consistently where your ideal customers and partners are already looking. From thought leadership content to speaking engagements, visibility creates opportunity. The entrepreneurs who invest in their visibility see measurable returns in leads, partnerships, and credibility.",
+    "author": "Featured Business Leader",
+    "date": "2026-01-18",
+    "category": "Business Growth",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
+  },
+  {
+    "id": 3,
+    "title": "Storytelling: The Secret Weapon of Successful Brands",
+    "excerpt": "Facts tell, stories sell. Discover how to craft narratives that resonate with your audience and drive engagement.",
+    "content": "Every successful brand has a compelling story. Rather than listing features and benefits, brands that win tell stories that connect emotionally with their audience. From startup origin stories to customer success cases, strategic storytelling builds loyalty and trust.",
+    "author": "Featured Business Leader",
+    "date": "2026-01-15",
+    "category": "Marketing",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
+  },
+  {
+    "id": 4,
+    "title": "Building Lasting Partnerships Through Thought Leadership",
+    "excerpt": "Thought leadership isn't about having all the answers—it's about sharing insights that matter to your industry.",
+    "content": "When you consistently share valuable insights and perspectives in your industry, you become a go-to resource. This builds trust, attracts partnerships, and opens doors to opportunities. Whether through articles, speaking, or strategic conversations, thought leadership positions you as someone worth knowing.",
+    "author": "Featured Business Leader",
+    "date": "2026-01-12",
+    "category": "Thought Leadership",
+    "featured": false,
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
+  }
+]

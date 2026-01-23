@@ -10,6 +10,7 @@ import StoryStrategyRetainer from "./pages/packages/StoryStrategyRetainer";
 import Addons from "./pages/Addons";
 import NotFound from "./pages/NotFound";
 import UPPTestPage from "./pages/UPPTestPage";
+import NewsWire from "./pages/NewsWire";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/news-wire" element={<NewsWire />} />
           <Route path="/packages/media-breakthrough" element={<MediaBreakthrough />} />
           <Route path="/packages/visibility-sprint" element={<VisibilitySprint />} />
           <Route path="/packages/story-strategy-retainer" element={<StoryStrategyRetainer />} />
