@@ -1,118 +1,98 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import newsData from "@/data/news.json";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Calendar } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-interface NewsItem {
-  id: number;
-  title: string;
-  excerpt: string;
-  date: string;
-  category: string;
-  image: string;
-  isFeatured?: boolean;
-}
+const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+};
 
 const NewsWirePreview = () => {
-  const featuredNews = newsData.filter((item: NewsItem) => item.isFeatured)[0];
-  const regularNews = newsData.filter((item: NewsItem) => !item.isFeatured).slice(0, 3);
-
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-    return new Date(dateString).toLocaleDateString("en-US", options);
-  };
+  const featuredArticle = newsData.find((article) => article.isFeatured);
+  const recentArticles = newsData
+    .filter((article) => !article.isFeatured)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3);
 
   return (
-    <section className="py-16 px-6 bg-slate-50">
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
-        <div className="mb-12">
-          <div className="inline-block mb-2">
-            <span className="bg-gold/20 text-gold text-xs font-bold px-3 py-1 rounded-full">
-              INSIGHTS & STRATEGY
-            </span>
-          </div>
-          <h2 className="text-4xl font-bold text-navy mb-4">
-            Curated Insights for Growth
-          </h2>
-          <p className="text-lg text-slate-600 max-w-2xl">
-            Expert perspectives on business strategy, personal branding, and thought leadership from industry leaders.
-          </p>
+    <section className="py-20 sm:py-32 bg-slate-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+            <Badge className="bg-gold/20 text-gold-foreground font-semibold mb-2">
+                INSIGHTS & STRATEGY
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-navy">
+                Curated Insights for Growth
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Expert perspectives on what's moving the needle in business and branding.
+            </p>
         </div>
 
-        {/* Featured Article + 3 Recent */}
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          {/* Featured Large Card */}
-          {featuredNews && (
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden border-l-4 border-gold h-full hover:shadow-xl transition-shadow">
-              <img
-                src={featuredNews.image}
-                alt={featuredNews.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="inline-block bg-gold text-navy text-xs font-bold px-3 py-1 rounded-full">
-                    Featured
-                  </span>
-                  <span className="text-xs text-slate-500">
-                    {formatDate(featuredNews.date)}
-                  </span>
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+          {/* Featured Article */}
+          {featuredArticle && (
+            <Card className="flex flex-col group overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border-l-4 border-gold">
+              <CardHeader className="p-0">
+                 <img src={featuredArticle.image} alt={featuredArticle.title} className="w-full h-64 object-cover" />
+              </CardHeader>
+              <CardContent className="p-6 flex-grow">
+                 <div className="flex items-center gap-4 mb-2">
+                    <Badge className="bg-gold text-navy font-bold">Featured</Badge>
+                    <p className="text-xs text-gray-500 flex items-center gap-1"><Calendar className="w-3 h-3" />{formatDate(featuredArticle.date)}</p>
                 </div>
-                <h3 className="text-xl font-bold text-navy mb-2">
-                  {featuredNews.title}
-                </h3>
-                <p className="text-slate-600 text-sm line-clamp-2">
-                  {featuredNews.excerpt}
-                </p>
-              </div>
-            </div>
+                <CardTitle className="text-2xl font-bold text-navy mb-2">{featuredArticle.title}</CardTitle>
+                <CardDescription className="text-gray-600">
+                  {featuredArticle.excerpt}
+                </CardDescription>
+              </CardContent>
+              <CardFooter>
+                 <Button asChild variant="link" className="text-navy font-bold p-0">
+                    <a href="/news-wire">Read More <ArrowRight className="ml-2 w-4 h-4" /></a>
+                </Button>
+              </CardFooter>
+            </Card>
           )}
 
-          {/* 3 Recent Articles */}
-          <div className="space-y-4">
-            {regularNews.map((item: NewsItem) => (
-              <div
-                key={item.id}
-                className="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow border border-slate-200 flex gap-4 items-start"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-20 h-20 object-cover rounded flex-shrink-0"
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-bold text-navy bg-slate-100 px-2 py-0.5 rounded">
-                      {item.category}
-                    </span>
-                    <span className="text-xs text-slate-500">
-                      {formatDate(item.date)}
-                    </span>
-                  </div>
-                  <h4 className="text-sm font-bold text-navy line-clamp-2">
-                    {item.title}
-                  </h4>
+          {/* Recent Articles */}
+          <div className="flex flex-col gap-4">
+            {recentArticles.map((article) => (
+              <Card key={article.id} className="flex group overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div className="w-1/3">
+                    <img src={article.image} alt={article.title} className="w-full h-full object-cover"/>
                 </div>
-              </div>
+                <div className="w-2/3">
+                    <CardContent className="p-4">
+                        <div className="flex items-center gap-2 mb-1">
+                             <Badge variant="secondary">{article.category}</Badge>
+                             <p className="text-xs text-gray-500">{formatDate(article.date)}</p>
+                        </div>
+                        <CardTitle className="text-md font-bold text-navy leading-tight mb-1">{article.title}</CardTitle>
+                        <Button asChild variant="link" size="sm" className="text-navy font-semibold p-0 h-auto">
+                            <a href="/news-wire">Read More <ArrowRight className="ml-1 w-3 h-3" /></a>
+                        </Button>
+                    </CardContent>
+                </div>
+              </Card>
             ))}
           </div>
         </div>
 
-        {/* View All CTA */}
-        <div className="flex justify-center">
-          <a href="/news-wire">
-            <Button
-              size="lg"
-              className="bg-navy hover:bg-navy/90 text-white"
-            >
-              View All Articles
-              <ArrowRight className="w-4 h-4 ml-2" />
+        <div className="text-center mt-12">
+            <Button size="lg" asChild className="bg-navy hover:bg-navy/90 text-white font-bold">
+                <a href="/news-wire">
+                    View All Articles <ArrowRight className="ml-2 w-5 h-5" />
+                </a>
             </Button>
-          </a>
         </div>
       </div>
     </section>

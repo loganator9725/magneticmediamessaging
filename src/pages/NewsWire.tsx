@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { MessageCircle, TrendingUp, Zap } from "lucide-react";
+import { TrendingUp, Zap, Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import newsData from "@/data/news.json";
+import { Badge } from "@/components/ui/badge";
 
 interface NewsItem {
   id: number;
@@ -17,191 +18,140 @@ interface NewsItem {
   isFeatured?: boolean;
 }
 
+const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+const newsCategories = [
+  "All",
+  "Personal Branding",
+  "Business Strategy",
+  "Marketing & Communications",
+  "Thought Leadership",
+  "Entrepreneurship",
+];
+
 const NewsWire = () => {
-  const [filter, setFilter] = useState<string>("all");
+  const [filter, setFilter] = useState("All");
 
-  const featuredNews = newsData.filter((item: NewsItem) => item.isFeatured);
-  const regularNews = newsData.filter(
-    (item: NewsItem) =>
-      !item.isFeatured && (filter === "all" || item.category === filter)
-  );
+  const featuredNews = newsData.filter((item) => item.isFeatured);
+  const regularNews = newsData.filter((item) => !item.isFeatured);
 
-  const categories = ["all", "Personal Branding", "Business Strategy", "Marketing & Communications", "Thought Leadership", "Entrepreneurship"];
-
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return new Date(dateString).toLocaleDateString("en-US", options);
-  };
+  const filteredNews =
+    filter === "All"
+      ? regularNews
+      : regularNews.filter((item) => item.category === filter);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white text-gray-800">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-navy to-blue-900 text-primary-foreground py-16 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Curated Insights & Industry News</h1>
-          <p className="text-xl text-primary-foreground/90 mb-6">
-            Expert perspectives on business growth, personal branding, and strategic success
-            from thought leaders and entrepreneurs transforming their markets.
-          </p>
-          <div className="flex gap-4 flex-wrap">
+      <header className="bg-gradient-to-r from-navy to-blue-900 text-white text-center py-20 px-4">
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+          Curated Insights & Industry News
+        </h1>
+        <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/80">
+          Stay ahead of the curve with expert perspectives on business growth, branding, and thought leadership.
+        </p>
+        <div className="mt-8 flex justify-center gap-8">
             <div className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-gold" />
-              <span className="text-sm">Curated content from industry leaders</span>
+                <TrendingUp className="w-6 h-6 text-gold" />
+                <span className="font-semibold">Market Trends</span>
             </div>
             <div className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-gold" />
-              <span className="text-sm">Actionable insights for growth</span>
+                <Zap className="w-6 h-6 text-gold" />
+                <span className="font-semibold">Growth Strategies</span>
             </div>
-          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Featured Section */}
-      {featuredNews.length > 0 && (
-        <section className="py-12 px-6 bg-gold/5 border-b border-gold/20">
-          <div className="container mx-auto max-w-6xl">
-            <h2 className="text-3xl font-bold mb-8 text-navy">Featured Story</h2>
-            <div className="grid md:grid-cols-1 gap-8">
-              {featuredNews.map((item: NewsItem) => (
-                <div
-                  key={item.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow border-l-4 border-gold"
+      <main className="container mx-auto py-16 px-4">
+        {/* Featured Section */}
+        {featuredNews.map((item: NewsItem) => (
+          <section key={item.id} className="mb-16 bg-gold/5 rounded-lg overflow-hidden shadow-lg border-l-4 border-gold">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+              <div className="md:col-span-2 p-8">
+                <Badge className="bg-gold/20 text-gold-foreground font-semibold mb-2">{item.category}</Badge>
+                <p className="text-sm text-gray-500 mb-2 flex items-center gap-2">
+                  <Calendar className="w-4 h-4" /> {formatDate(item.date)}
+                </p>
+                <h2 className="text-3xl font-bold text-navy mb-4">{item.title}</h2>
+                <p className="text-gray-600 mb-4">{item.excerpt}</p>
+                <p className="text-gray-700 leading-relaxed">{item.content}</p>
+                 <p className="text-sm text-gray-500 mt-4 flex items-center gap-2">
+                  <User className="w-4 h-4" /> By {item.author}
+                </p>
+              </div>
+              <div className="w-full h-full">
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+              </div>
+            </div>
+          </section>
+        ))}
+
+        {/* Filter Tabs */}
+        <section className="mb-8">
+            <h2 className="text-3xl font-bold text-center text-navy mb-8">Latest Articles</h2>
+            <div className="flex flex-wrap justify-center gap-2">
+                {newsCategories.map((category) => (
+                <Button
+                    key={category}
+                    variant={filter === category ? "default" : "outline"}
+                    onClick={() => setFilter(category)}
+                    className={`rounded-full px-6 transition-colors ${filter === category ? 'bg-navy text-white hover:bg-navy/90' : 'bg-slate-100 text-gray-700 hover:bg-slate-200'}`}
                 >
-                  <div className="grid md:grid-cols-3 gap-0">
-                    <div className="md:col-span-2 p-8">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="inline-block bg-gold text-navy text-xs font-bold px-3 py-1 rounded-full">
-                          {item.category}
-                        </span>
-                        <span className="text-sm text-slate-500">
-                          {formatDate(item.date)}
-                        </span>
-                      </div>
-                      <h3 className="text-2xl font-bold text-navy mb-3">
-                        {item.title}
-                      </h3>
-                      <p className="text-slate-600 mb-4 leading-relaxed">
-                        {item.excerpt}
-                      </p>
-                      <p className="text-slate-700 mb-6">{item.content}</p>
-                      <div className="flex items-center gap-4">
-                        <div>
-                          <p className="text-sm font-semibold text-navy">
-                            By {item.author}
-                          </p>
-                        </div>
-                      </div>
+                    {category}
+                </Button>
+                ))}
+            </div>
+        </section>
+
+
+        {/* News Grid */}
+        <section>
+          {filteredNews.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredNews.map((item: NewsItem) => (
+                <div key={item.id} className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl border border-slate-200 flex flex-col">
+                  <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="flex justify-between items-center mb-2">
+                      <Badge variant="secondary">{item.category}</Badge>
+                      <p className="text-xs text-gray-500 flex items-center gap-1"><Calendar className="w-3 h-3"/>{formatDate(item.date)}</p>
                     </div>
-                    <div className="md:block hidden">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <h3 className="text-xl font-bold text-navy mb-2 flex-grow">{item.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4">{item.excerpt}</p>
+                    <p className="text-xs text-gray-500 flex items-center gap-1"><User className="w-3 h-3"/>By {item.author}</p>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* Main Content */}
-      <div className="py-12 px-6">
-        <div className="container mx-auto max-w-6xl">
-          {/* Filter Tabs */}
-          <div className="flex gap-2 mb-8 flex-wrap">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-full font-medium transition-colors text-sm ${
-                  filter === cat
-                    ? "bg-navy text-primary-foreground"
-                    : "bg-slate-100 text-navy hover:bg-slate-200"
-                }`}
-              >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </button>
-            ))}
-          </div>
-
-          {/* News Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {regularNews.map((item: NewsItem) => (
-              <article
-                key={item.id}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden border border-slate-200"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold text-navy bg-slate-100 px-3 py-1 rounded-full">
-                      {item.category}
-                    </span>
-                    <span className="text-xs text-slate-500">
-                      {formatDate(item.date)}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-navy mb-3 line-clamp-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm mb-4 line-clamp-3">
-                    {item.excerpt}
-                  </p>
-                  <p className="text-xs font-semibold text-slate-700">
-                    By {item.author}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Empty State */}
-          {regularNews.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-slate-600">No articles in this category yet.</p>
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-lg text-gray-500">No articles in this category yet.</p>
             </div>
           )}
-        </div>
-      </div>
+        </section>
 
-      {/* Featured Placement CTA */}
-      <section className="py-16 px-6 bg-gradient-to-r from-navy to-blue-900 text-primary-foreground">
-        <div className="container mx-auto max-w-6xl">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold mb-4">
-              Get Your Story Featured
-            </h2>
-            <p className="text-lg text-primary-foreground/90 mb-6">
-              This curated platform reaches entrepreneurs, business leaders, and decision-makers 
-              actively seeking growth strategies and business insights. Feature your expertise, 
-              company story, or thought leadership to establish authority with a highly engaged audience.
-            </p>
-            <div className="flex gap-4">
-              <a href="mailto:jennifer@magneticmediamessaging.com">
-                <Button
-                  size="lg"
-                  className="bg-gold hover:bg-gold/90 text-navy font-bold"
-                >
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  Inquire About Featured Placement
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
+        {/* CTA Section */}
+        <section className="text-center py-20 mt-16 bg-gradient-to-r from-navy to-blue-900 text-white rounded-lg px-4">
+          <h2 className="text-4xl font-bold mb-4">Get Your Story Featured</h2>
+          <p className="max-w-2xl mx-auto text-primary-foreground/80 mb-8">
+            Reach an engaged audience of entrepreneurs, executives, and industry leaders. Feature your insights on our platform to build authority and visibility.
+          </p>
+          <Button
+            size="lg"
+            variant="secondary"
+            className="bg-gold text-navy hover:bg-gold/90 font-bold text-lg px-8 py-6"
+            asChild
+          >
+            <a href="mailto:jennifer@magneticmediamessaging.com">
+              Inquire About Featured Placement
+            </a>
+          </Button>
+        </section>
+      </main>
+      
       <Footer />
     </div>
   );
