@@ -26,7 +26,7 @@ const NewsWire = () => {
       !item.isFeatured && (filter === "all" || item.category === filter)
   );
 
-  const categories = ["all", "Strategy", "Business Growth", "Marketing", "Thought Leadership"];
+  const categories = ["all", "Personal Branding", "Business Strategy", "Marketing & Communications", "Thought Leadership", "Entrepreneurship"];
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -42,19 +42,19 @@ const NewsWire = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-navy to-blue-900 text-primary-foreground py-16 px-6">
         <div className="container mx-auto max-w-6xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Curated News & Insights</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Curated Insights & Industry News</h1>
           <p className="text-xl text-primary-foreground/90 mb-6">
-            Expert perspectives on business growth, marketing strategy, and thought leadership
-            from our network of visionary entrepreneurs and industry leaders.
+            Expert perspectives on business growth, personal branding, and strategic success
+            from thought leaders and entrepreneurs transforming their markets.
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap">
             <div className="flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-gold" />
-              <span className="text-sm">Handpicked stories from industry leaders</span>
+              <span className="text-sm">Curated content from industry leaders</span>
             </div>
             <div className="flex items-center gap-2">
               <Zap className="w-5 h-5 text-gold" />
-              <span className="text-sm">Strategic insights for growth</span>
+              <span className="text-sm">Actionable insights for growth</span>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@ const NewsWire = () => {
       {featuredNews.length > 0 && (
         <section className="py-12 px-6 bg-gold/5 border-b border-gold/20">
           <div className="container mx-auto max-w-6xl">
-            <h2 className="text-3xl font-bold mb-8 text-navy">Featured</h2>
+            <h2 className="text-3xl font-bold mb-8 text-navy">Featured Story</h2>
             <div className="grid md:grid-cols-1 gap-8">
               {featuredNews.map((item: NewsItem) => (
                 <div
@@ -120,7 +120,7 @@ const NewsWire = () => {
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-full font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full font-medium transition-colors text-sm ${
                   filter === cat
                     ? "bg-navy text-primary-foreground"
                     : "bg-slate-100 text-navy hover:bg-slate-200"
@@ -175,7 +175,7 @@ const NewsWire = () => {
         </div>
       </div>
 
-      {/* Get Featured CTA */}
+      {/* Featured Placement CTA */}
       <section className="py-16 px-6 bg-gradient-to-r from-navy to-blue-900 text-primary-foreground">
         <div className="container mx-auto max-w-6xl">
           <div className="max-w-2xl">
@@ -183,9 +183,9 @@ const NewsWire = () => {
               Get Your Story Featured
             </h2>
             <p className="text-lg text-primary-foreground/90 mb-6">
-              This curated news platform reaches decision-makers, entrepreneurs, and business leaders 
-              looking for fresh perspectives and strategic insights. Feature your story, expertise, or 
-              brand messaging to this engaged audience.
+              This curated platform reaches entrepreneurs, business leaders, and decision-makers 
+              actively seeking growth strategies and business insights. Feature your expertise, 
+              company story, or thought leadership to establish authority with a highly engaged audience.
             </p>
             <div className="flex gap-4">
               <a href="mailto:jennifer@magneticmediamessaging.com">
